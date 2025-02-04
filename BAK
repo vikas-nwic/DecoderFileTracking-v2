@@ -1,0 +1,110 @@
+      //@Scheduled(cron = "0 0/1 * * * ?")  // every one minute
+      //@Scheduled(cron = "0 * * * * *")
+      //@Scheduled(fixedRate = 5000)
+//    public ApiResponse<List<String>> processCsvFiles() throws IOException {
+//        List<String> matchingRows = new ArrayList<>();
+//        LocalDate currentDate = LocalDate.now();
+//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//        String timestampAsString = Telemetryutils.timestampToString(timestamp);
+//
+//        // Define the output format and format the date into the desired output format
+//        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        String formattedDate = currentDate.format(outputFormatter);
+//
+//        ApiResponse<List<String>> apiResponse = new ApiResponse<>();
+//
+//        // Prepare the date formatter once to avoid re-initialization in each loop
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+//
+//        // Map to track occurrences of each sensorHubCode
+//        Map<String, Integer> sensorHubCodeCountMap = new HashMap<>();
+//
+//        try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(basePath + absolutePath), "*.csv")) {
+//
+//            boolean foundTodayFile = false;
+//
+//            // Iterate through the files in the directory
+//            for (Path file : stream) {
+//                String createdDate = Telemetryutils.getFileCreatedDate(file);
+//
+//                // Process only the current day's files
+//                if (createdDate.equals(currentDate.toString())) {
+//
+//                    List<String> allLines = Files.readAllLines(file);
+//
+//                    // Process lines in the file
+//                    for (String line : allLines) {
+//                        logger.info("line len: " + line.length());
+//
+//                        // Skip empty or blank lines
+//                        if (line == null || line.trim().isEmpty()) {
+//                            continue;
+//                        }
+//
+//                        // Split the line into cells by comma
+//                        String[] cells = line.split(",", -1);
+//
+//                        // Skip the header row
+//                        if (cells.length < 2 || cells[0].startsWith("&") == false) {
+//                            continue;
+//                        }
+//
+//                        String fileCellDate = cells[1];
+//                        logger.info("fileCellDate: " + fileCellDate);
+//
+//                        String sensorHubCode = cells[0];
+//                        logger.info("sensorHubCode: " + sensorHubCode);
+//
+//                        Date date = formatter.parse(fileCellDate);
+//                        String receiveFileDate = formatter.format(date);
+//                        logger.info("File Date: " + receiveFileDate + " current date: " + formattedDate);
+//
+//                        // Compare the file date with the current date
+//                        if (receiveFileDate.equals(formattedDate)) {
+//                            logger.info("Comparison true");
+//
+//                            // Track the count of each sensorHubCode
+//                           // sensorHubCodeCountMap.put(sensorHubCode, sensorHubCodeCountMap.getOrDefault(sensorHubCode, 0) + 1);
+//                            if(sensorHubCode.equals(sensorHubCode)) {
+//                                // Optionally, save TelemetryGPRSDecoder for each sensorHubCode
+//                                TelemetryGPRSDecoder telemetryGPRSDecoder = new TelemetryGPRSDecoder();
+//                                telemetryGPRSDecoder.setSensorHubCode(sensorHubCode.substring(1));
+//                                telemetryGPRSDecoder.setReceivedFileDate(receiveFileDate);
+//
+//                                // Set the correct receivedFileCount based on the sensorHubCode's occurrence count
+//                                int count = sensorHubCodeCountMap.get(sensorHubCode);
+//                                telemetryGPRSDecoder.setReceivedFileCount(count); // This should resolve the null issue
+//
+//                                telemetryGPRSDecoderRepo.saveAndFlush(telemetryGPRSDecoder);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            // After processing all lines, add the aggregated data to the response
+//            if (!sensorHubCodeCountMap.isEmpty()) {
+//                // Create a formatted string for each sensorHubCode and its count
+//                for (Map.Entry<String, Integer> entry : sensorHubCodeCountMap.entrySet()) {
+//                    String sensorHubCodeWithCount = entry.getKey() + "," + entry.getValue();
+//                    matchingRows.add(sensorHubCodeWithCount);
+//                }
+//
+//                apiResponse.setStatus(HttpStatus.OK);
+//                apiResponse.setMessage("Ground Water files processed successfully.");
+//                //apiResponse.setData(matchingRows);
+//            } else {
+//                apiResponse.setStatus(HttpStatus.NO_CONTENT);
+//                apiResponse.setMessage("No files found for today's date.");
+//                apiResponse.setData(Collections.emptyList());
+//            }
+//
+//        } catch (Exception e) {
+//            logger.error("Error while processing: " + e.getMessage(), e);
+//            apiResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+//            apiResponse.setMessage("An error occurred while processing the CSV files.");
+//        }
+//
+//        return apiResponse;
+//    }
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot Log Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #logContent {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            max-width: 90%;
+            margin: auto;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Spring Boot Log Viewer</h1>
+<button onclick="loadLogFile()">Load Log File</button>
+
+<div id="logContent">
+    <!-- Log content will be displayed here -->
+</div>
+
+<script>
+    function loadLogFile() {
+
+        fetch('http://localhost:9096/decoder/ft/logs')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('logContent').textContent = data;
+            })
+            .catch(error => {
+                document.getElementById('logContent').textContent = "Error loading log file: " + error;
+            });
+    }
+</script>
+
+</body>
+</html>
