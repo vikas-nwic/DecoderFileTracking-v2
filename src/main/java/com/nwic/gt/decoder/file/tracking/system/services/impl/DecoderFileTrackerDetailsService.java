@@ -45,13 +45,14 @@ public class DecoderFileTrackerDetailsService {
     }
 
     // Insert data into the database tbl telemetry_decoder_file_tracker_details
-    public void insertTelemetryData( String sensorHubCode, String contentDate) { //, int agencyId
+    public void insertTelemetryData( String sensorHubCode, String contentDate, String fileName) { //, int agencyId
        logger.info("Inserting data: sensorHubCode = {}, contentDate{} ",  sensorHubCode, contentDate );
         try {
             DecoderFileTrackerDetails telemetryData = telemetryData = new DecoderFileTrackerDetails();
                 telemetryData.setSensorHubCode(sensorHubCode);
                 telemetryData.setContentCount(1);
                 telemetryData.setContentDate(contentDate);
+                telemetryData.setFilename(fileName);
             fileDetailsRepo.saveAndFlush(telemetryData);  // Save to the repositorylogger.info("Data inserted successfully for receivedFileCount = {}", receivedDataCount);
         } catch (Exception e) {
                 logger.error("Error saving data to the database{} ", e.getMessage());

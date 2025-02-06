@@ -32,11 +32,11 @@ import java.util.stream.Collectors;
  * Author: Vikas Predhva
  * Organization: Grant Thornton
  * Date: 04-02-2025
- * Description: Amravati Surface Water Agency
+ * Description: Arunachal Pradesh Surface Water Agency
  */
 
 @Component
-public class AmravatiSurfaceWaterAgency {
+public class ArunachalPradeshSurfaceWaterAgency {
 
     @Autowired
     private DecoderFileTrackerDetailsService decoderFileTrackerDetailsService;
@@ -44,15 +44,14 @@ public class AmravatiSurfaceWaterAgency {
     @Autowired
     private DecoderFileTrackerDetailsRepository repository;
 
-    private static final Logger logger = LoggerFactory.getLogger(AmravatiSurfaceWaterAgency.class);
+    private static final Logger logger = LoggerFactory.getLogger(ArunachalPradeshSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.GPRS_INSAT_Amravati_SW;
+    private static final String  folderPath = ApiConstants.GPRS_INSAT_Arunachal_SW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
-
 
     // Method to process CSV files in the provided folder path
     public void readAllDirectoryFiles() throws IOException {
-        logger.info("ap_gw readAllDirectoryFiles start...");
+        logger.info("arunachal_sw readAllDirectoryFiles start...");
         Path folder = Paths.get(folderPath);
         if (!Files.isDirectory(folder)) {
             throw new IOException(String.format("Directory not found: %s", folderPath));
@@ -69,14 +68,12 @@ public class AmravatiSurfaceWaterAgency {
                     String fileName = file.getFileName().toString();
                     List<DecoderFileTrackerDetails> fileTrackerDetails = repository.findByFilename(fileName);
                     logger.info("fileTrackerDetails: " + fileTrackerDetails);
-
                     // Check if the fileName already exists in the fileTrackerDetails list
                     boolean fileAlreadyProcessed = fileTrackerDetails.stream()
                             .anyMatch(detail -> detail.getFilename().equals(fileName));
                     if (fileAlreadyProcessed) {
                         continue;  // Skip this file if it has already been processed
                     }
-
                     boolean fileHasRecords = readSingleFile(file, currentDate, lastDate);
                     if (fileHasRecords) {
                         recordFound = true;
@@ -99,7 +96,7 @@ public class AmravatiSurfaceWaterAgency {
             throw e;
         }
         //saveProcessedFiles(processedFiles, ApiConstants.AP_GW_PROCESSED_FILES_PATH);  // temporary comment out for testing purpose
-        logger.info("ap_gw readAllDirectoryFiles() end...");
+        logger.info("arunachal_sw readAllDirectoryFiles() end...");
     }
     // Method to process an individual file
     private boolean readSingleFile(Path csvFile, LocalDate currentDate, LocalDate lastDate) throws IOException {
@@ -111,7 +108,6 @@ public class AmravatiSurfaceWaterAgency {
         logger.info("readSingleFile() start... " + currentDate);
         try (BufferedReader reader = Files.newBufferedReader(csvFile)) {
             String fileName = csvFile.getFileName().toString();
-            //fileName = fileName.substring(0, fileName.length() - 4);
             fileName = fileName.replaceAll("\\.csv$", "");
             boolean isValidFile = DecoderUtils.fileDateValidation(fileName);
             logger.info("isValidFile: " + isValidFile);
@@ -149,6 +145,5 @@ public class AmravatiSurfaceWaterAgency {
         logger.info("readSingleFile() end...");
         return recordFound;
     }
-
 
 }

@@ -18,14 +18,14 @@ import java.util.UUID;
 
 public class AppUtils {
 
-    // Helper method to generate a unique filename with a timestamp and UUID
+    // Method to generate a unique filename with a timestamp and UUID
     public static String generateUniqueFilename(String baseName, String extension) {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String uuid = UUID.randomUUID().toString().substring(0, 8);
         return baseName + "_" + timestamp + "_" + uuid + "." + extension;
     }
 
-    // Helper method to create a title style
+    // Method to create a title style
     public static CellStyle createTitleStyle(Workbook workbook) {
         CellStyle style = workbook.createCellStyle();
         Font font = workbook.createFont();
@@ -63,8 +63,7 @@ public class AppUtils {
         picture.resize(1.5); // Resize the image to the desired size (1.5 times the original size)
     }
 
-
-    // Helper method to create a header style with borders and background
+    // Method to create a header style with borders and background
     public static CellStyle createHeaderCellStyle(Workbook workbook) {
         CellStyle style = workbook.createCellStyle();
         style.setFillForegroundColor(IndexedColors.GREY_80_PERCENT.getIndex());
@@ -88,7 +87,7 @@ public class AppUtils {
 
 
 
-    // Helper method to create alternating row styles
+    // Method to create alternating row styles
     public static CellStyle createRowStyle(Workbook workbook, IndexedColors bgColor) {
         CellStyle style = workbook.createCellStyle();
         style.setFillForegroundColor(bgColor.getIndex());
@@ -106,7 +105,7 @@ public class AppUtils {
         return style;
     }
 
-    // Helper method to create a cell with style
+    // Method to create a cell with style
     public static void createStyledCell(Row row, int column, String value, CellStyle style) {
         Cell cell = row.createCell(column);
         cell.setCellValue(value);

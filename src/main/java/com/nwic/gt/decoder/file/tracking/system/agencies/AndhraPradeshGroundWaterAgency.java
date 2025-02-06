@@ -31,24 +31,24 @@ import java.util.stream.Collectors;
 /**
  * Author: Vikas Predhva
  * Organization: Grant Thornton
- * Date: 04-02-2025
- * Description: Amravati Surface Water Agency
+ * Date: 05-02-2025
+ * Description: Andhra Pradesh Ground Water Agency
  */
 
 @Component
-public class AmravatiSurfaceWaterAgency {
+public class AndhraPradeshGroundWaterAgency {
 
     @Autowired
     private DecoderFileTrackerDetailsService decoderFileTrackerDetailsService;
 
-    @Autowired
-    private DecoderFileTrackerDetailsRepository repository;
-
-    private static final Logger logger = LoggerFactory.getLogger(AmravatiSurfaceWaterAgency.class);
+    private static final Logger logger = LoggerFactory.getLogger(AndhraPradeshGroundWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.GPRS_INSAT_Amravati_SW;
+    private static final String  folderPath = ApiConstants.GPRS_INSAT_AP_GW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
+
+    @Autowired
+    private DecoderFileTrackerDetailsRepository repository;
 
     // Method to process CSV files in the provided folder path
     public void readAllDirectoryFiles() throws IOException {
@@ -101,6 +101,69 @@ public class AmravatiSurfaceWaterAgency {
         //saveProcessedFiles(processedFiles, ApiConstants.AP_GW_PROCESSED_FILES_PATH);  // temporary comment out for testing purpose
         logger.info("ap_gw readAllDirectoryFiles() end...");
     }
+
+
+    // Method to process an individual file
+//    private boolean readSingleFile(Path csvFile, LocalDate currentDate, LocalDate lastDate) throws IOException {
+//
+//        boolean recordFound = false;
+//        String contentDate = null;
+//        int contentCount = 0;
+//        String sensorHubCode = null;
+//        String line;
+//        logger.info("ap_gw readSingleFile() start..."+currentDate);
+//
+//        try (BufferedReader reader = Files.newBufferedReader(csvFile)) {
+//
+//            String fileName = csvFile.getFileName().toString();
+//            //fileName = fileName.substring(0, fileName.length() - 4);
+//            fileName = fileName.replaceAll("\\.csv$", "");
+//            boolean isValidFile = DecoderUtils.fileDateValidation(fileName);
+//            logger.info("isValidFile: "+isValidFile);
+//
+//        if(isValidFile){
+//            logger.info("============ isValidFile condition ============");
+////            if ((line = reader.readLine()) != null) {
+////                logger.info("Skipping header: " + line);
+////            }
+//            while ((line = reader.readLine()) != null) {
+//
+//                if (line.trim().isEmpty()) continue; // Skip blank lines
+//                String[] columns = line.split(",");
+//                if (columns.length < 2) continue; // Skip invalid lines
+//
+//                sensorHubCode = columns[0].trim();
+//                contentDate = columns[1].trim();
+//
+//                boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
+//                logger.info("isValidContentDate: "+isValidContentDate);
+//
+//                if(isValidContentDate){
+//                    LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+//                    logger.info("currentDate: " + currentDate + " lastDate: " + lastDate + "content date: " + contentDate);
+//                    contentCount++;
+//                        contentDate = contentDate;
+//                        recordFound = true;
+//                        logger.info("sensorHubCode: " + sensorHubCode);
+//                        if (sensorHubCode.startsWith("&")) {
+//                            String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
+//                            logger.info("Inserting for sensorHubCode: " + cleanedSensorHubCode);
+//                            detailsService.insertTelemetryData(cleanedSensorHubCode, contentDate);
+//                        } else {
+//                            throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code ");
+//                        }
+//                } // end content date check
+//            }  // end while loop
+//        } // is file valid check
+//            else {
+//            throw new ResourceNotFoundException("No file find to process");
+//        }
+//
+//        }
+//        logger.info("ap_gw readSingleFile() end...");
+//        return recordFound;
+//    }
+
     // Method to process an individual file
     private boolean readSingleFile(Path csvFile, LocalDate currentDate, LocalDate lastDate) throws IOException {
         boolean recordFound = false;
@@ -132,6 +195,7 @@ public class AmravatiSurfaceWaterAgency {
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
                         if (sensorHubCode.startsWith("&")) {
                             String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
+                            // Inserting data into database or processing logic
                             decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString());
                         } else {
                             throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
@@ -149,6 +213,5 @@ public class AmravatiSurfaceWaterAgency {
         logger.info("readSingleFile() end...");
         return recordFound;
     }
-
 
 }

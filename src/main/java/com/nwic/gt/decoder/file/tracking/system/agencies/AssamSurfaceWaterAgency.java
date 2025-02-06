@@ -11,10 +11,8 @@ import lombok.var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,41 +21,37 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * Author: Vikas Predhva
+ * Designation : Software Engineering
  * Organization: Grant Thornton
- * Date: 04-02-2025
- * Description: Amravati Surface Water Agency
+ * Date: 06-02-2025
+ * Description: test Description
  */
-
-@Component
-public class AmravatiSurfaceWaterAgency {
+public class AssamSurfaceWaterAgency {
 
     @Autowired
     private DecoderFileTrackerDetailsService decoderFileTrackerDetailsService;
 
     @Autowired
-    private DecoderFileTrackerDetailsRepository repository;
+    private DecoderFileTrackerDetailsRepository decoderFileTrackerDetailsRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(AmravatiSurfaceWaterAgency.class);
+    private static final Logger logger = LoggerFactory.getLogger(AssamSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.GPRS_INSAT_Amravati_SW;
+    private static final String  folderPath = ApiConstants.GPRS_INSAT_Assam_SW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
 
     // Method to process CSV files in the provided folder path
     public void readAllDirectoryFiles() throws IOException {
-        logger.info("ap_gw readAllDirectoryFiles start...");
+        logger.info("Assam_SW readAllDirectoryFiles start...");
         Path folder = Paths.get(folderPath);
         if (!Files.isDirectory(folder)) {
             throw new IOException(String.format("Directory not found: %s", folderPath));
         }
-
         LocalDate currentDate = LocalDate.now();
         LocalDate lastDate = currentDate.minusDays(DAY_RESTRICTION);
         try (var files = Files.walk(folder)) {
@@ -67,7 +61,7 @@ public class AmravatiSurfaceWaterAgency {
             for (Path file : fileList) {
                 try {
                     String fileName = file.getFileName().toString();
-                    List<DecoderFileTrackerDetails> fileTrackerDetails = repository.findByFilename(fileName);
+                    List<DecoderFileTrackerDetails> fileTrackerDetails = decoderFileTrackerDetailsRepository.findByFilename(fileName);
                     logger.info("fileTrackerDetails: " + fileTrackerDetails);
 
                     // Check if the fileName already exists in the fileTrackerDetails list
@@ -99,8 +93,10 @@ public class AmravatiSurfaceWaterAgency {
             throw e;
         }
         //saveProcessedFiles(processedFiles, ApiConstants.AP_GW_PROCESSED_FILES_PATH);  // temporary comment out for testing purpose
-        logger.info("ap_gw readAllDirectoryFiles() end...");
+        logger.info("Assam_SW readAllDirectoryFiles() end...");
     }
+
+
     // Method to process an individual file
     private boolean readSingleFile(Path csvFile, LocalDate currentDate, LocalDate lastDate) throws IOException {
         boolean recordFound = false;
@@ -111,7 +107,6 @@ public class AmravatiSurfaceWaterAgency {
         logger.info("readSingleFile() start... " + currentDate);
         try (BufferedReader reader = Files.newBufferedReader(csvFile)) {
             String fileName = csvFile.getFileName().toString();
-            //fileName = fileName.substring(0, fileName.length() - 4);
             fileName = fileName.replaceAll("\\.csv$", "");
             boolean isValidFile = DecoderUtils.fileDateValidation(fileName);
             logger.info("isValidFile: " + isValidFile);
@@ -132,6 +127,7 @@ public class AmravatiSurfaceWaterAgency {
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
                         if (sensorHubCode.startsWith("&")) {
                             String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
+                            // Inserting data into database or processing logic
                             decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString());
                         } else {
                             throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
@@ -149,6 +145,5 @@ public class AmravatiSurfaceWaterAgency {
         logger.info("readSingleFile() end...");
         return recordFound;
     }
-
 
 }

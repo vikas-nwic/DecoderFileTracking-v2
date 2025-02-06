@@ -1,6 +1,6 @@
 package com.nwic.gt.decoder.file.tracking.system.controllers;
 
-import com.nwic.gt.decoder.file.tracking.system.agencies.APGroundWaterAgency;
+import com.nwic.gt.decoder.file.tracking.system.agencies.AndhraPradeshGroundWaterAgency;
 import com.nwic.gt.decoder.file.tracking.system.DTOs.DecoderOwnerAgencyIdDTO;
 import com.nwic.gt.decoder.file.tracking.system.exception.ResourceNotFoundException;
 import com.nwic.gt.decoder.file.tracking.system.services.impl.DecoderFileTrackerDetailsService;
@@ -24,7 +24,9 @@ public class TelemetryDecoderController {
     private DecoderFileTrackerDetailsService telemetryGprsDecoderService;
 
     @Autowired
-    private APGroundWaterAgency apgwAgency;
+    private AndhraPradeshGroundWaterAgency apgwAgency;
+
+
     //@Scheduled(fixedRate = 1800000) // 30 minutes = 1800000 milliseconds
     //@Scheduled(fixedRate = 3600000) // 1 hour = 3600000 milliseconds
     @Operation(summary = "Save telemetry decoder file data", description = "This API will count number of files of current date and seven day older and  Save there data e.g. suppose today is 13 January 2025 then it will minus 7 day from current date , 13-7 days means it will read files from 07 JANUARY 2025  TO 07 JANUARY 2025")

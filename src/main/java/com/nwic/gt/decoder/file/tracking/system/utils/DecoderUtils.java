@@ -83,7 +83,7 @@ public class DecoderUtils {
 
                     matchFound = true; // Set match flag
                     String dateAndIndex = matcher.group();
-                    logger.info("\nFile: " + fileName);
+                    logger.info("\n File: " + fileName);
                     logger.info("Extracted: " + dateAndIndex);
 
                     // Parse the extracted date and compare with the current date
@@ -792,5 +792,15 @@ public class DecoderUtils {
 //    }
 
 
+    public static String timeConversion() {
+        long currentTimeMillis = System.currentTimeMillis();
+        long totalSeconds = currentTimeMillis / 1000;
+
+        // Convert total seconds to minutes and remaining seconds
+        long minutes = totalSeconds / 60;
+        long seconds = totalSeconds % 60;
+        System.out.println("Time in minutes and seconds: " + minutes + " minutes, " + seconds + " seconds");
+        return "minutes: " +minutes+ " + seconds " +seconds;
+    }
 
 }
