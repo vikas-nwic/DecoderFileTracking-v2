@@ -15,36 +15,36 @@ public class ApiConstants {
     public static final Integer DAY_RESTRICTION = 7;  // do not hard code it, maintain it in a txt file.
 
     // Andhra Pradesh Agency
-    public static final String GPRS_INSAT_AP_GW = "D:/ftp_data/gprs_insat/gprs_insat/ap_gw/ap_gw";
-    public static final String GPRS_INSAT_AP_SW = "D:/ftp_data/gprs_insat/gprs_insat/ap_sw/ap_sw";
+    public static final String GPRS_INSAT_AP_GW = "/ftp_data/gprs_insat/gprs_insat/ap_gw/ap_gw";
+    public static final String GPRS_INSAT_AP_SW = "/ftp_data/gprs_insat/gprs_insat/ap_sw/ap_sw";
 
     // Arunachal Pradesh Agency
     //public static final String GPRS_INSAT_Arunachal_GW = "D:/ftp_data/gprs_insat/gprs_insat/ArunanchalGW";  // no file yet
-    public static final String GPRS_INSAT_Arunachal_SW = "D:/ftp_data/gprs_insat/gprs_insat/arunachal_sw/arunachal_sw";
+    public static final String GPRS_INSAT_Arunachal_SW = "/ftp_data/gprs_insat/gprs_insat/arunachal_sw/arunachal_sw";
 
     // Assam Agency
     //public static final String GPRS_INSAT_Assam_GW = "D:/ftp_data/gprs_insat/gprs_insat/assam_sw";   // no file yet
-    public static final String GPRS_INSAT_Assam_SW = "D:/ftp_data/gprs_insat/gprs_insat/assam_sw/assam_sw";
+    public static final String GPRS_INSAT_Assam_SW = "/ftp_data/gprs_insat/gprs_insat/assam_sw/assam_sw";
 
     // Bihar Agency
-    public static final String GPRS_INSAT_Bihar_GW = "D:/ftp_data/gprs_insat/gprs_insat/bihar_gw/bihar_gw";
-    public static final String GPRS_INSAT_Bihar_SW = "D:/ftp_data/gprs_insat/gprs_insat/bihar_sw/bihar_sw";
+    public static final String GPRS_INSAT_Bihar_GW = "/ftp_data/gprs_insat/gprs_insat/bihar_gw/bihar_gw";
+    public static final String GPRS_INSAT_Bihar_SW = "/ftp_data/gprs_insat/gprs_insat/bihar_sw/bihar_sw";
 
     // Chhattisgarh Agency
-    public static final String GPRS_INSAT_chhattisgarh_GW = "D:/ftp_data/gprs_insat/gprs_insat/chhattisgarh_gw/chhattisgarh_gw";
-    public static final String GPRS_INSAT_chhattisgarh_SW = "D:/ftp_data/gprs_insat/gprs_insat/chhattisgarh_sw/chhattisgarh_sw";
+    public static final String GPRS_INSAT_chhattisgarh_GW = "/ftp_data/gprs_insat/gprs_insat/chhattisgarh_gw/chhattisgarh_gw";
+    public static final String GPRS_INSAT_chhattisgarh_SW = "/ftp_data/gprs_insat/gprs_insat/chhattisgarh_sw/chhattisgarh_sw";
 
     // Delhi Agency
-    public static final String GPRS_INSAT_Delhi_SW_GW = "D:/ftp_data/gprs_insat/gprs_insat/Delhi_SW_GW/Delhi_SW_GW";
+    public static final String GPRS_INSAT_Delhi_SW_GW = "/ftp_data/gprs_insat/gprs_insat/Delhi_SW_GW/Delhi_SW_GW";
 
     // Himachal Pradesh Agency
-    public static final String GPRS_INSAT_Himachal_GW = "D:/ftp_data/gprs_insat/gprs_insat/hp_gw/hp_gw";
-    public static final String GPRS_INSAT_Himachal_SW = "D:/ftp_data/gprs_insat/gprs_insat/hp_sw/hp_sw";
+    public static final String GPRS_INSAT_Himachal_GW = "/ftp_data/gprs_insat/gprs_insat/hp_gw/hp_gw";
+    public static final String GPRS_INSAT_Himachal_SW = "/ftp_data/gprs_insat/gprs_insat/hp_sw/hp_sw";
 
 
     // Amravati Agency
 //    public static final String GPRS_INSAT_Amravati_GW = "D:/ftp_data/gprs_insat/gprs_insat/AmravatiGw";
-    public static final String GPRS_INSAT_Amravati_SW = "D:/ftp_data/gprs_insat/gprs_insat/AmravatiSw";
+    public static final String GPRS_INSAT_Amravati_SW = "/ftp_data/gprs_insat/gprs_insat/AmravatiSw";
 
 
 

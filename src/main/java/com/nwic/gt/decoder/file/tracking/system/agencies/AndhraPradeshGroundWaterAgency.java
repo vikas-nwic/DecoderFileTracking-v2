@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * Author: Vikas Predhva
  * Organization: Grant Thornton
  * Date: 05-02-2025
- * Description: Andhra Pradesh Ground Water Agency
+ * Description: Telemetry Decoder File Tracker Andhra Pradesh Ground Water Agency
  */
 
 @Component
@@ -189,7 +189,7 @@ public class AndhraPradeshGroundWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                        LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+                        //LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);

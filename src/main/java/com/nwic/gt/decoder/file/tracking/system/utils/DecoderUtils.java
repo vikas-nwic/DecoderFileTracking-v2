@@ -34,6 +34,9 @@ public class DecoderUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(DecoderUtils.class);
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER2 = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+
     public static boolean  fileDateValidation(String fileName1) {
 
         int ABSOLUTE_YEAR = Calendar.getInstance().get(Calendar.YEAR);
@@ -186,11 +189,13 @@ public class DecoderUtils {
         // Regex patterns to match various date formats with time index
         String[] patterns = {
                 "\\d{2}/\\d{2}/\\d{2} \\d{2}:\\d{2}", // DD/MM/YY HH:MM
+                "\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}", // DD/MM/YYYY HH:MM 06/02/2025 15:00
         };
 
         // Date format patterns corresponding to the regex patterns
         String[] dateFormats = {
-                "dd/MM/yy HH:mm"
+                "dd/MM/yy HH:mm",
+                "dd/MM/yyyy HH:mm"
         };
 
         for (String fileName : fileNames) {
@@ -801,6 +806,35 @@ public class DecoderUtils {
         long seconds = totalSeconds % 60;
         System.out.println("Time in minutes and seconds: " + minutes + " minutes, " + seconds + " seconds");
         return "minutes: " +minutes+ " + seconds " +seconds;
+    }
+
+
+    public static LocalDateTime parseDate(String dateStr) {
+        // Try parsing with the first formatter
+        try {
+            return LocalDateTime.parse(dateStr, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e1) {
+            // If it fails, try the second formatter
+            try {
+                return LocalDateTime.parse(dateStr, DATE_TIME_FORMATTER2);
+            } catch (DateTimeParseException e2) {
+                // If both parsings fail, handle the exception as needed (e.g., throw an exception or return null)
+                throw new IllegalArgumentException("Unable to parse date: " + dateStr);
+            }
+        }
+    }
+
+    // Method to measure and log the execution time
+    public static void measureExecutionTime(Runnable task) {
+        long startTime = System.currentTimeMillis();
+        task.run();
+        long endTime = System.currentTimeMillis();
+        // Calculate the execution time in milliseconds
+        long durationInMillis = endTime - startTime;
+        // Convert milliseconds to minutes and seconds
+        long minutes = (durationInMillis / 1000) / 60;
+        long seconds = (durationInMillis / 1000) % 60;
+        logger.info("Method Execution time: {} minutes and {} seconds", minutes, seconds);
     }
 
 }

@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * Author: Vikas Predhva
  * Organization: Grant Thornton
  * Date: 04-02-2025
- * Description: Amravati Surface Water Agency
+ * Description: Telemetry Decoder File Tracker Amravati Surface Water Agency
  */
 
 @Component
@@ -68,8 +68,6 @@ public class AmravatiSurfaceWaterAgency {
                 try {
                     String fileName = file.getFileName().toString();
                     List<DecoderFileTrackerDetails> fileTrackerDetails = repository.findByFilename(fileName);
-                    logger.info("fileTrackerDetails: " + fileTrackerDetails);
-
                     // Check if the fileName already exists in the fileTrackerDetails list
                     boolean fileAlreadyProcessed = fileTrackerDetails.stream()
                             .anyMatch(detail -> detail.getFilename().equals(fileName));
@@ -126,7 +124,7 @@ public class AmravatiSurfaceWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                        LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+                        //LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);

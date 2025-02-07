@@ -123,12 +123,23 @@ ALTER TABLE IF EXISTS public.telemetry_decoder_file_tracker
 
 -- DROP TABLE IF EXISTS public.telemetry_decoder_file_tracker_details;
 
+-- Table: public.telemetry_decoder_file_tracker_details
+
+-- DROP TABLE IF EXISTS public.telemetry_decoder_file_tracker_details;
+
+------------------------------- 07-02-2025 ---------------------------------------
+
+-- Table: public.telemetry_decoder_file_tracker_details
+
+-- DROP TABLE IF EXISTS public.telemetry_decoder_file_tracker_details;
+
 CREATE TABLE IF NOT EXISTS public.telemetry_decoder_file_tracker_details
 (
-    id serial,
+    id integer NOT NULL DEFAULT nextval('telemetry_decoder_file_tracker_details_id_seq'::regclass),
     sensor_hub_code character varying(15) COLLATE pg_catalog."default",
     content_count integer,
     content_date character varying(20) COLLATE pg_catalog."default",
+    file_name character varying(100) COLLATE pg_catalog."default" DEFAULT ''::character varying,
     insertion_date timestamp without time zone,
     CONSTRAINT telemetry_decoder_file_tracker_details_pkey PRIMARY KEY (id)
 )

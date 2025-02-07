@@ -11,6 +11,7 @@ import lombok.var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -29,8 +30,9 @@ import java.util.stream.Collectors;
  * Designation : Software Engineering
  * Organization: Grant Thornton
  * Date: 06-02-2025
- * Description: test Description
+ * Description: Telemetry Decoder File Tracker Bihar Ground Water Agency
  */
+@Component
 public class BiharGroundWaterAgency {
 
     @Autowired
@@ -39,7 +41,7 @@ public class BiharGroundWaterAgency {
     @Autowired
     private DecoderFileTrackerDetailsRepository decoderFileTrackerDetailsRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(AndhraPradeshGroundWaterAgency.class);
+    private static final Logger logger = LoggerFactory.getLogger(BiharGroundWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
     private static final String  folderPath = ApiConstants.GPRS_INSAT_Bihar_GW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
@@ -62,7 +64,6 @@ public class BiharGroundWaterAgency {
                 try {
                     String fileName = file.getFileName().toString();
                     List<DecoderFileTrackerDetails> fileTrackerDetails = decoderFileTrackerDetailsRepository.findByFilename(fileName);
-                    logger.info("fileTrackerDetails: " + fileTrackerDetails);
                     // Check if the fileName already exists in the fileTrackerDetails list
                     boolean fileAlreadyProcessed = fileTrackerDetails.stream()
                             .anyMatch(detail -> detail.getFilename().equals(fileName));
@@ -117,7 +118,7 @@ public class BiharGroundWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                        LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+                        //LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);

@@ -11,6 +11,7 @@ import lombok.var;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -29,8 +30,9 @@ import java.util.stream.Collectors;
  * Designation : Software Engineering
  * Organization: Grant Thornton
  * Date: 06-02-2025
- * Description: test Description
+ * Description: Telemetry Decoder File Tracker Himachal Pradesh Surface Water Agency
  */
+@Component
 public class HimachalPradeshSurfaceWaterAgency {
 
     @Autowired
@@ -118,7 +120,7 @@ public class HimachalPradeshSurfaceWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                        LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+                        //LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);

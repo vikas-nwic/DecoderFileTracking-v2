@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * Author: Vikas Predhva
  * Organization: Grant Thornton
  * Date: 04-02-2025
- * Description: Arunachal Pradesh Surface Water Agency
+ * Description: Telemetry Decoder File Tracker Arunachal Pradesh Surface Water Agency
  */
 
 @Component
@@ -42,7 +42,7 @@ public class ArunachalPradeshSurfaceWaterAgency {
     private DecoderFileTrackerDetailsService decoderFileTrackerDetailsService;
 
     @Autowired
-    private DecoderFileTrackerDetailsRepository repository;
+    private DecoderFileTrackerDetailsRepository decoderFileTrackerDetailsRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(ArunachalPradeshSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
@@ -56,7 +56,6 @@ public class ArunachalPradeshSurfaceWaterAgency {
         if (!Files.isDirectory(folder)) {
             throw new IOException(String.format("Directory not found: %s", folderPath));
         }
-
         LocalDate currentDate = LocalDate.now();
         LocalDate lastDate = currentDate.minusDays(DAY_RESTRICTION);
         try (var files = Files.walk(folder)) {
@@ -66,8 +65,7 @@ public class ArunachalPradeshSurfaceWaterAgency {
             for (Path file : fileList) {
                 try {
                     String fileName = file.getFileName().toString();
-                    List<DecoderFileTrackerDetails> fileTrackerDetails = repository.findByFilename(fileName);
-                    logger.info("fileTrackerDetails: " + fileTrackerDetails);
+                    List<DecoderFileTrackerDetails> fileTrackerDetails = decoderFileTrackerDetailsRepository.findByFilename(fileName);
                     // Check if the fileName already exists in the fileTrackerDetails list
                     boolean fileAlreadyProcessed = fileTrackerDetails.stream()
                             .anyMatch(detail -> detail.getFilename().equals(fileName));
@@ -122,7 +120,7 @@ public class ArunachalPradeshSurfaceWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                        LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+                        //LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);

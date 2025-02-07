@@ -29,8 +29,8 @@ import java.util.stream.Collectors;
  * Author: Vikas Predhva
  * Designation : Software Engineering
  * Organization: Grant Thornton
- * Date: 06-02-2025
- * Description: test Description
+ * Date: 07-02-2025
+ * Description: Telemetry Decoder File Tracker Delhi Ground And Surface Water Agency
  */
 @Component
 public class DelhiGroundAndSurfaceWaterAgency {
@@ -39,7 +39,7 @@ public class DelhiGroundAndSurfaceWaterAgency {
     private DecoderFileTrackerDetailsService decoderFileTrackerDetailsService;
 
     @Autowired
-    private DecoderFileTrackerDetailsRepository repository;
+    private DecoderFileTrackerDetailsRepository decoderFileTrackerDetailsRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(AndhraPradeshSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
@@ -62,8 +62,7 @@ public class DelhiGroundAndSurfaceWaterAgency {
             for (Path file : fileList) {
                 try {
                     String fileName = file.getFileName().toString();
-                    List<DecoderFileTrackerDetails> fileTrackerDetails = repository.findByFilename(fileName);
-                    logger.info("fileTrackerDetails: " + fileTrackerDetails);
+                    List<DecoderFileTrackerDetails> fileTrackerDetails = decoderFileTrackerDetailsRepository.findByFilename(fileName);
                     // Check if the fileName already exists in the fileTrackerDetails list
                     boolean fileAlreadyProcessed = fileTrackerDetails.stream()
                             .anyMatch(detail -> detail.getFilename().equals(fileName));
@@ -120,7 +119,7 @@ public class DelhiGroundAndSurfaceWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                        LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+                        //LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
