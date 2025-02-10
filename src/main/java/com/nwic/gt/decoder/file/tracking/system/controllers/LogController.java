@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/decoder/ft/logs")
+@RequestMapping("/decoder/ft/logs/")
 public class LogController {
 
     @Autowired

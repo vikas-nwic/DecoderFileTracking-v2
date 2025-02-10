@@ -55,7 +55,8 @@ public class DecoderUtils {
                 "\\d{4}-\\d{2}-\\d{2}_\\d{4}", // YYYY-MM-DD_HHMM
                 "\\d{2}-\\d{2}-\\d{4}_\\d{4}", // DD-MM-YYYY_HHMM
                 "\\d{2}-\\d{2}-\\d{2}_\\d{4}", // DD-MM-YY_HHMM
-                "\\d{6}_\\d{4}" // DDMMYY_HHMM & YYMMDD_HHMM
+                "\\d{6}_\\d{4}", // DDMMYY_HHMM & YYMMDD_HHMM
+                "\\d{14}" // yyyyMMddHHmmss
         };
 
         // Date format patterns corresponding to the regex patterns
@@ -66,7 +67,8 @@ public class DecoderUtils {
                 "yyyy-MM-dd_HHmm",
                 "dd-MM-yyyy_HHmm",
                 "dd-MM-yy_HHmm",
-                "ddMMyy_HHmm"
+                "ddMMyy_HHmm",
+                "yyyyMMddHHmmss"
         };
 
         for (String fileName : fileNames) {
@@ -168,9 +170,9 @@ public class DecoderUtils {
                     break; // Exit while loop after the first match
 
                 } // while end
-                // logger.info("\nwhile loop-2 end");
+                // logger.info("\n while loop-2 end");
             } // loop-2 end
-            // logger.info("\nloop-1 end...");
+            // logger.info("\n loop-1 end...");
         } // loop-1 end
         return isValidFile;
     }
@@ -190,16 +192,19 @@ public class DecoderUtils {
         String[] patterns = {
                 "\\d{2}/\\d{2}/\\d{2} \\d{2}:\\d{2}", // DD/MM/YY HH:MM
                 "\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}", // DD/MM/YYYY HH:MM 06/02/2025 15:00
+                "\\d{1}/\\d{1}/\\d{2} \\d{2}:\\d{2}", // D/M/YY HH:MM
+                "\\d{1}/\\d{1}/\\d{2} \\d{2}:\\d{1}" // D/M/YY HH:M
         };
-
         // Date format patterns corresponding to the regex patterns
         String[] dateFormats = {
                 "dd/MM/yy HH:mm",
-                "dd/MM/yyyy HH:mm"
+                "dd/MM/yyyy HH:mm",
+                "d/M/yy HH:mm",
+                "dd/MM/yy HH:m"
         };
 
         for (String fileName : fileNames) {
-             logger.info(" content Date loop-1...");
+            logger.info(" content Date loop-1...");
             boolean matchFound = false; // To track if a match is found
 
             for (int i = 0; i < patterns.length; i++) {
@@ -292,7 +297,7 @@ public class DecoderUtils {
                         // logger.info("Error parsing date: " + dateAndIndex);
                         logger.info("Error parsing date: " + dateAndIndex, e);
                     }
-                     logger.info(" content Date while loop-2 end before break");
+                    logger.info(" content Date while loop-2 end before break");
                     break; // Exit while loop after the first match
 
                 } // while end
@@ -681,10 +686,10 @@ public class DecoderUtils {
                 isValid = true;
                 logger.info("Both dates are the same.");
             }
-           else if (currentDT.isAfter(fileDT)) {
+            else if (currentDT.isAfter(fileDT)) {
                 logger.info("currentDT > fileDT");
                 isValid = true;
-           } else {
+            } else {
                 isValid = false;
                 logger.info("false");
             }
@@ -697,12 +702,12 @@ public class DecoderUtils {
 /////////////////
 
     public long getFileCount() throws IOException {
-        long count =  Files.list(Paths.get(ApiConstants.GPRS_INSAT_AP_GW))
+        long count =  Files.list(Paths.get(ApiConstants.FTP_DATA_AP_GW))
                 //  .filter(Files::isRegularFile) // Only count regular files
                 .filter(path -> path.toString().endsWith(".csv")) // Filter for .csv files
                 .count();
         if (count == 0) {
-            logger.warn("No CSV files found in the directory: {}", ApiConstants.GPRS_INSAT_AP_GW);
+            logger.warn("No CSV files found in the directory: {}", ApiConstants.FTP_DATA_AP_GW);
         }
         return count;
     }
@@ -831,7 +836,6 @@ public class DecoderUtils {
         long endTime = System.currentTimeMillis();
         // Calculate the execution time in milliseconds
         long durationInMillis = endTime - startTime;
-        // Convert milliseconds to minutes and seconds
         long minutes = (durationInMillis / 1000) / 60;
         long seconds = (durationInMillis / 1000) % 60;
         logger.info("Method Execution time: {} minutes and {} seconds", minutes, seconds);

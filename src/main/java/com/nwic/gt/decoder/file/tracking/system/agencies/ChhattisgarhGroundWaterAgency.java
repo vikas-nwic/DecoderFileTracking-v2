@@ -43,7 +43,7 @@ public class ChhattisgarhGroundWaterAgency {
 
     private static final Logger logger = LoggerFactory.getLogger(AndhraPradeshSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.GPRS_INSAT_chhattisgarh_GW;
+    private static final String  folderPath = ApiConstants.FTP_DATA_CHHATTISGARH_GW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
     // Method to process CSV files in the provided folder path

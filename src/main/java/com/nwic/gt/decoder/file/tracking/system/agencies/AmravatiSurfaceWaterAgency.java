@@ -46,7 +46,7 @@ public class AmravatiSurfaceWaterAgency {
 
     private static final Logger logger = LoggerFactory.getLogger(AmravatiSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.GPRS_INSAT_Amravati_SW;
+    private static final String  folderPath = ApiConstants.FTP_DATA_Amravati_SW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
 

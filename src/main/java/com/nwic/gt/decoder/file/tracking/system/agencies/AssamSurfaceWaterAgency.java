@@ -43,7 +43,7 @@ public class AssamSurfaceWaterAgency {
 
     private static final Logger logger = LoggerFactory.getLogger(AssamSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.GPRS_INSAT_Assam_SW;
+    private static final String  folderPath = ApiConstants.FTP_DATA_ASSAM_SW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
 
@@ -121,7 +121,7 @@ public class AssamSurfaceWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                       // LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
+                        // LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);

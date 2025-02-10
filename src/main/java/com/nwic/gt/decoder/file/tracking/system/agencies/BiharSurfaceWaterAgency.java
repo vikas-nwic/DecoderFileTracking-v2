@@ -43,7 +43,7 @@ public class BiharSurfaceWaterAgency {
 
     private static final Logger logger = LoggerFactory.getLogger(BiharSurfaceWaterAgency.class);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.GPRS_INSAT_Bihar_SW;
+    private static final String  folderPath = ApiConstants.FTP_DATA_BIHAR_SW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
 
