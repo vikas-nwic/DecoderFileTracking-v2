@@ -1,0 +1,65 @@
+telangana_sw    =  TelanganaSurfaceWaterAgency ---- Inprogress
+
+mp_gw    = MadhyaPradeshGroundWaterAgency
+mpgw_atal = MadhyaPradeshGroundWaterAtalAgency
+
+odisha_gw  = OdishaGroundWaterAgency
+odisha_sw  = OdishaSurfaceWaterAgency
+
+sikkim	=	SikkimrAgency
+
+haryana_sw	=	HaryanaSurfaceWaterAgency
+haryana_gw	=	HaryanaGroundWaterAgency
+
+Jharkhand_gw	=	JharkhandGroundWaterAgency
+jharkhand_sw	=	JharkhandSurfaceWaterAgency
+
+karnataka_gwd	=	KarnatakaGroundDWaterAgency
+
+manipur	=	ManipurAgency
+
+meghalaya	=	MeghalayaAgency
+
+mizoram	=	MizoramAgency
+
+
+
+CGWB_Jaipur	=	CGWBJaipurAgency
+CGWB_Kolkata	=	CGWBKolkataAgency
+
+
+
+
+CGWBGPRSAgency
+
+delhi_ers_ybo	=	X
+jaipur_real_ers	=	X
+atal_jal_data	=	JharkhandSurfaceWaterAgency
+
+
+13-02-2025 - Done
+
+BBMB  = Bhakra Beas Management Board
+
+CGWB_Bangalore = Central Ground Water Board, South Western Region, Bangalore
+
+CGWB_Chennai = Central Ground Water Board, Chennai
+
+goa_sw	=	GoaSurfaceWaterAgency
+
+gujarat_sw	=	GujaratSurfaceWaterAgency
+
+msamrav_sw	=	MaharashtraAmravatiSurfaceWaterAgency
+msaurang_sw	=	MaharashtraAurangabadSurfaceWaterAgency
+
+punjab_sw1	=	PunjabSurfaceWater1Agency
+
+
+
+
+CGWBChennaiAgency
+CGWBBangaloreAgency
+
+
+CGWB_Bangalore
+

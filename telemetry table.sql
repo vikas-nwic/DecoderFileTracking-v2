@@ -148,3 +148,7 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.telemetry_decoder_file_tracker_details
     OWNER to postgres;
+
+------------------------------- 13-02-2025 ---------------------------------------
+
+alter table telemetry_decoder_file_tracker_details add folder_name varchar(60) default '';

@@ -125,9 +125,11 @@ public class ChhattisgarhSurfaceWaterAgency {
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
                         if (sensorHubCode.startsWith("&")) {
                             String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
-                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString());
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "chhattisgarh_sw");
                         } else {
-                            throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                            //throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                            String cleanedSensorHubCode = sensorHubCode.trim();
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "chhattisgarh_sw");
                         }
                     }
                 }

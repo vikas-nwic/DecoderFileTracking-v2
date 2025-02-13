@@ -27,8 +27,8 @@ import java.util.*;
  * @author Vikas Predhva
  */
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/v1/decoder")
+@CrossOrigin(origins = "*")
 public class DecoderAppController {
 
     @Autowired

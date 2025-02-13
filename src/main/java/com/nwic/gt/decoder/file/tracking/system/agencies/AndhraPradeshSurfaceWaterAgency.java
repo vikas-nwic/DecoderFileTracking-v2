@@ -128,10 +128,12 @@ public class AndhraPradeshSurfaceWaterAgency {
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
                         if (sensorHubCode.startsWith("&")) {
                             String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
-                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString());
-                        } else {
-                            throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
-                        }
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "ap_sw");
+                    } else {
+                        //throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                        String cleanedSensorHubCode = sensorHubCode.trim();
+                        decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "ap_sw");
+                    }
                     }
                 }
             } else {

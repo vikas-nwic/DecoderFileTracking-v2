@@ -20,31 +20,32 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Author: vikas
- * Date: 10-02-2025
- * Description: Telemetry Decoder File Tracker Telangana Ground Water Agency
+ * Author: Vikas Predhva
+ * Designation : Software Engineering
+ * Organization: Grant Thornton
+ * Date: 13-02-2025
+ * Description: Punjab Surfac eWater1 Agency
  */
 @Component
-public class TelanganaGroundWaterAgency {
+public class PunjabSurfaceWater1Agency {
+
     @Autowired
     private DecoderFileTrackerDetailsService decoderFileTrackerDetailsService;
 
     @Autowired
     private DecoderFileTrackerDetailsRepository decoderFileTrackerDetailsRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(TelanganaGroundWaterAgency.class);
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.FTP_DATA_TELANGANA_GW;
+    private static final Logger logger = LoggerFactory.getLogger(PunjabSurfaceWater1Agency.class);
+    private static final String  folderPath = ApiConstants.FTP_DATA_PUNJAB_SW1;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
     // Method to process CSV files in the provided folder path
     public void readAllDirectoryFiles() throws IOException {
-        logger.info("telanagana_gwd readAllDirectoryFiles start...");
+        logger.info("punjab_sw1 readAllDirectoryFiles start...");
         Path folder = Paths.get(folderPath);
         if (!Files.isDirectory(folder)) {
             throw new IOException(String.format("Directory not found: %s", folderPath));
@@ -86,8 +87,7 @@ public class TelanganaGroundWaterAgency {
             logger.error("Error reading directory: {}", folderPath, e);
             throw e;
         }
-        //saveProcessedFiles(processedFiles, ApiConstants.AP_GW_PROCESSED_FILES_PATH);  // temporary comment out for testing purpose
-        logger.info("telanagana_gwd readAllDirectoryFiles() end...");
+        logger.info("punjab_sw1 readAllDirectoryFiles() end...");
     }
     // Method to process an individual file
     private boolean readSingleFile(Path csvFile, LocalDate currentDate, LocalDate lastDate) throws IOException {
@@ -113,15 +113,16 @@ public class TelanganaGroundWaterAgency {
                     boolean isValidContentDate = DecoderUtils.contentDateValidation(contentDate);
                     logger.info("isValidContentDate: " + isValidContentDate);
                     if (isValidContentDate) {
-                        //LocalDateTime dateTime = LocalDateTime.parse(contentDate, DATE_TIME_FORMATTER);
                         contentCount++;
                         recordFound = true;
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
                         if (sensorHubCode.startsWith("&")) {
                             String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
-                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString());
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "punjab_sw1");
                         } else {
-                            throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                            //throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                            String cleanedSensorHubCode = sensorHubCode.trim();
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "punjab_sw1");
                         }
                     }
                 }

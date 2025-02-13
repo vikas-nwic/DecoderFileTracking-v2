@@ -52,31 +52,65 @@ public class ApiConstants {
     public static final String FTP_DATA_HIMACHAL_GW = BASEDIR +"/ftp_data/hp_gw/hp_gw/";
     public static final String FTP_DATA_HIMACHAL_SW = BASEDIR +"/ftp_data/hp_sw/hp_sw/";
 
-//    -- Received files on: 09-02-2025
 
+//    -- Received files on: 09-02-2025
     // Rajasthan Agency
-    public static final String FTP_DATA_RAJASTHAN_GW = BASEDIR +"/ftp_data/rajasthan_gw/rajasthan_gw";
-    public static final String FTP_DATA_RAJASTHAN_ATAL = BASEDIR +"/ftp_data/rajasthan_atal/rajasthan_atal";
+    public static final String FTP_DATA_RAJASTHAN_GW = BASEDIR +"/ftp_data/rajasthan_gw/rajasthan_gw/";
+    public static final String FTP_DATA_RAJASTHAN_ATAL = BASEDIR +"/ftp_data/rajasthan_atal/rajasthan_atal/";
 
 
     // Uttar Pradesh Agency
-    public static final String FTP_DATA_UTTAR_PRADESH_GW_ATAL = BASEDIR +"/ftp_data/upgw_atal/upgw_atal";
-    public static final String FTP_DATA_UTTAR_PRADESH_SW = BASEDIR +"/ftp_data/up_sw/up_sw";
+    public static final String FTP_DATA_UTTAR_PRADESH_GW_ATAL = BASEDIR +"/ftp_data/upgw_atal/upgw_atal/";
+    public static final String FTP_DATA_UTTAR_PRADESH_SW = BASEDIR +"/ftp_data/up_sw/up_sw/";
 
     // Gujarat Agency
-    public static final String FTP_DATA_GUJARAT_GWD = BASEDIR +"/ftp_data/gujrat_gwd/gujrat_gwd";
-    public static final String FTP_DATA_GUJARAT_SW_PHASE2 = BASEDIR +"/ftp_data/gujarat_sw_phase2/gujarat_sw_phase2";
+    public static final String FTP_DATA_GUJARAT_GWD = BASEDIR +"/ftp_data/gujrat_gwd/gujrat_gwd/";
+    public static final String FTP_DATA_GUJARAT_SW_PHASE2 = BASEDIR +"/ftp_data/gujarat_sw_phase2/gujarat_sw_phase2/";
 
     // Maharashtra Agency
-    public static final String FTP_DATA_MAHARASHTRA_GW_ATAL = BASEDIR +"/ftp_data/MaharastraGw_atal/MaharastraGw_atal";
-    public static final String FTP_DATA_MAHARASHTRA_SW = BASEDIR +"/ftp_data/MaharastraSw/MaharastraSw";
+    public static final String FTP_DATA_MAHARASHTRA_GW_ATAL = BASEDIR +"/ftp_data/MaharastraGw_atal/MaharastraGw_atal/";
+    public static final String FTP_DATA_MAHARASHTRA_SW = BASEDIR +"/ftp_data/MaharastraSw/MaharastraSw/";
 
     // Central Ground Water Board
-    public static final String FTP_DATA_CGWB_GPRS = BASEDIR +"/ftp_data/CGWB_GPRS/CGWB_GPRS";
-    public static final String FTP_DATA_CGWB_HYD = BASEDIR +"/ftp_data/CGWB_Hyd/CGWB_Hyd";
+    public static final String FTP_DATA_CGWB_GPRS = BASEDIR +"/ftp_data/CGWB_GPRS/CGWB_GPRS/";
+    public static final String FTP_DATA_CGWB_HYD = BASEDIR +"/ftp_data/CGWB_Hyd/CGWB_Hyd/";
 
     // Telangana Ground Water
-    public static final String FTP_DATA_TELANGANA_GW = BASEDIR +"/ftp_data/telanagana_gwd/telanagana_gwd";
+    public static final String FTP_DATA_TELANGANA_GWD = BASEDIR +"/ftp_data/telanagana_gwd/telanagana_gwd/";
+
+
+
+
+     // Date: 13-02-2025
+     // -- Received files on: 12-02-2025
+
+    // Telangana Surface Water
+    public static final String FTP_DATA_TELANGANA_SW = BASEDIR +"/ftp_data/telangana_sw/telangana_sw/";
+
+    // Bhakra Beas Management Board Agency
+    public static final String FTP_DATA_BBMB = BASEDIR +"/ftp_data/BBMB/BBMB/";
+
+    // Central Ground Water Board, South Western Region, Bangalore
+    public static final String FTP_DATA_CGWB_BANGALORE = BASEDIR +"/ftp_data/CGWB_Bangalore/CGWB_Bangalore/";
+
+    // Central Ground Water Board, South Western Region, Chennai
+    public static final String FTP_DATA_CGWB_CHENNAI = BASEDIR +"/ftp_data/CGWB_Chennai/CGWB_Chennai/";
+
+    // Goa Surface Water Agency
+    public static final String FTP_DATA_GOA_SW = BASEDIR +"/ftp_data/goa_sw/goa_sw/";
+
+    // Gujarat Surface Water Agency
+    public static final String FTP_DATA_GUJARAT_SW = BASEDIR +"/ftp_data/gujarat_sw/gujarat_sw/";
+
+    // Maharashtra Amravati Surface Water Agency
+    public static final String FTP_DATA_MSAMRAV_SW = BASEDIR +"/ftp_data/msamrav_sw/msamrav_sw/";
+
+    // Maharashtra Aurangabad Surface Water Agency
+    public static final String FTP_DATA_MSAURANG_SW = BASEDIR +"/ftp_data/msaurang_sw/msaurang_sw/";
+
+    // Punjab Surface Water1 Agency
+    public static final String FTP_DATA_PUNJAB_SW1 = BASEDIR +"/ftp_data/punjab_sw1/punjab_sw1/";
+
 
 ///////////////////////////
 //@PostConstruct

@@ -38,7 +38,6 @@ public class UttarPradeshAtalGroundWaterAgency {
     private DecoderFileTrackerDetailsRepository decoderFileTrackerDetailsRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UttarPradeshAtalGroundWaterAgency.class);
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
     private static final String  folderPath = ApiConstants.FTP_DATA_UTTAR_PRADESH_GW_ATAL;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
@@ -121,10 +120,12 @@ public class UttarPradeshAtalGroundWaterAgency {
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
                         if (sensorHubCode.startsWith("&")) {
                             String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
-                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString());
-                        } else {
-                            throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
-                        }
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "upgw_atal");
+                    } else {
+                        //throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                        String cleanedSensorHubCode = sensorHubCode.trim();
+                        decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "upgw_atal");
+                    }
                     }
                 }
             } else {

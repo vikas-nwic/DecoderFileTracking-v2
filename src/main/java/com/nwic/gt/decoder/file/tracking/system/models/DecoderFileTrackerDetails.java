@@ -33,6 +33,9 @@ public class DecoderFileTrackerDetails {
     @Column(name = "file_name")
     private String filename;
 
+    @Column(name = "folder_name")
+    private String folderName;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "insertion_date", nullable = false, updatable = false)

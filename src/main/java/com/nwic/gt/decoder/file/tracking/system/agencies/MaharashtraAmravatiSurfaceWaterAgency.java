@@ -20,34 +20,31 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Author: Vikas Predhva
+ * Designation : Software Engineering
  * Organization: Grant Thornton
- * Date: 09-02-2025
- * Description: Telemetry Decoder File Tracker Gujrat Ground Water Agency
+ * Date: 13-02-2025
+ * Description: Maharashtra Amravati Surface Water Agency
  */
-
 @Component
-public class GujaratGroundWaterAgency {
-
+public class MaharashtraAmravatiSurfaceWaterAgency {
     @Autowired
     private DecoderFileTrackerDetailsService decoderFileTrackerDetailsService;
 
     @Autowired
     private DecoderFileTrackerDetailsRepository decoderFileTrackerDetailsRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(GujaratGroundWaterAgency.class);
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-    private static final String  folderPath = ApiConstants.FTP_DATA_GUJARAT_GWD;
+    private static final Logger logger = LoggerFactory.getLogger(MaharashtraAmravatiSurfaceWaterAgency.class);
+    private static final String  folderPath = ApiConstants.FTP_DATA_MSAMRAV_SW;
     private static final Integer  DAY_RESTRICTION = ApiConstants.DAY_RESTRICTION;
 
     // Method to process CSV files in the provided folder path
     public void readAllDirectoryFiles() throws IOException {
-        logger.info("gujrat_gwd readAllDirectoryFiles start...");
+        logger.info("msamrav_sw readAllDirectoryFiles start...");
         Path folder = Paths.get(folderPath);
         if (!Files.isDirectory(folder)) {
             throw new IOException(String.format("Directory not found: %s", folderPath));
@@ -89,7 +86,7 @@ public class GujaratGroundWaterAgency {
             logger.error("Error reading directory: {}", folderPath, e);
             throw e;
         }
-        logger.info("gujrat_gwd readAllDirectoryFiles() end...");
+        logger.info("msamrav_sw readAllDirectoryFiles() end...");
     }
     // Method to process an individual file
     private boolean readSingleFile(Path csvFile, LocalDate currentDate, LocalDate lastDate) throws IOException {
@@ -121,9 +118,11 @@ public class GujaratGroundWaterAgency {
                         logger.info("Record found: Sensor Hub Code: " + sensorHubCode + ", Date: " + contentDate);
                         if (sensorHubCode.startsWith("&")) {
                             String cleanedSensorHubCode = sensorHubCode.substring(1).trim();
-                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString());
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "MaharastraSw");
                         } else {
-                            throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                            //throw new InvalidSensorHubCodeFoundException("Invalid Sensor Hub Code: " + sensorHubCode);
+                            String cleanedSensorHubCode = sensorHubCode.trim();
+                            decoderFileTrackerDetailsService.insertTelemetryData(cleanedSensorHubCode, contentDate, csvFile.getFileName().toString(), "MaharastraSw");
                         }
                     }
                 }

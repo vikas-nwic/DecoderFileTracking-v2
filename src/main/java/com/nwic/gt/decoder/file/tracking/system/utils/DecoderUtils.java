@@ -191,24 +191,28 @@ public class DecoderUtils {
         // Regex patterns to match various date formats with time index
         String[] patterns = {
                 "\\d{2}/\\d{2}/\\d{2} \\d{2}:\\d{2}", // DD/MM/YY HH:MM
-                "\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}", // DD/MM/YYYY HH:MM 06/02/2025 15:00
+                "\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}", // DD/MM/YYYY HH:MM  06/02/2025 15:00
                 "\\d{1}/\\d{1}/\\d{2} \\d{2}:\\d{2}", // D/M/YY HH:MM
-                "\\d{1}/\\d{1}/\\d{2} \\d{2}:\\d{1}" // D/M/YY HH:M
+                "\\d{1}/\\d{1}/\\d{2} \\d{2}:\\d{1}", // D/M/YY HH:M
+                "\\d{2}/\\d{1}/\\d{2} \\d{2}:\\d{2}" // DD/M/YY HH:MM  11/2/25 06:00
         };
         // Date format patterns corresponding to the regex patterns
         String[] dateFormats = {
                 "dd/MM/yy HH:mm",
                 "dd/MM/yyyy HH:mm",
                 "d/M/yy HH:mm",
-                "dd/MM/yy HH:m"
+                "dd/MM/yy HH:m",
+                "dd/M/yy HH:mm"
         };
 
+
+
         for (String fileName : fileNames) {
-            logger.info(" content Date loop-1...");
+            //logger.info(" content Date loop-1...");
             boolean matchFound = false; // To track if a match is found
 
             for (int i = 0; i < patterns.length; i++) {
-                logger.info(" content Date patterns check loop-2...");
+                //logger.info(" content Date patterns check loop-2...");
                 if (matchFound)
                     break; // Exit loop if a match is already found
 
@@ -231,14 +235,14 @@ public class DecoderUtils {
                         calendar.setTime(extractedDate);
 
                         String datePartTemp = dateAndIndex.substring(0, 6);
-                        // logger.info("datePartTemp: " + datePartTemp);
-                        // logger.info("substring : " + datePartTemp.substring(4, 6));
+                        logger.info("datePartTemp: " + datePartTemp);
+                        logger.info("substring : " + datePartTemp.substring(4, 6));
 
                         if (!dateAndIndex.equals(ABSOLUTE_YEAR) // "2025"
                                 && datePartTemp.startsWith(String.valueOf(PARTIAL_YEAR)) && // "25"
                                 !datePartTemp.substring(4, 6)
                                         .equals(String.valueOf(PARTIAL_YEAR))) {
-                            // logger.info("codition 1 satisfied");
+                             logger.info("codition 1 satisfied");
                             // this condition will handle this 250115_1505
                             if (patterns[i].equals("\\d{6}_\\d{4}")) {
                                 // Special handling for DDMMYY_HHMM
@@ -254,12 +258,14 @@ public class DecoderUtils {
                                 calendar.set(year, month, day);
                                 extractedDate = calendar.getTime();
                             }
-                            // logger.info("codition 1 end");
+                             logger.info("codition 1 end");
+                        }else{
+                            logger.info("content date validation fail");
                         }
                         if (!dateAndIndex.equals(ABSOLUTE_YEAR) // "2025"
                                 && datePartTemp.endsWith(String.valueOf(PARTIAL_YEAR)) // "25"
                                 && !datePartTemp.substring(4, 6).equals(String.valueOf(PARTIAL_YEAR))) {
-                            // logger.info("codition 2 satisfied");
+                             logger.info("codition 2 satisfied");
                         } else {
                             if (patterns[i].equals("\\d{6}_\\d{4}") ||
                                     patterns[i].equals("\\d{2}/\\d{2}/\\d{2}_\\d{4}") ||
@@ -294,7 +300,7 @@ public class DecoderUtils {
                             isValidFile = true;
                         }
                     } catch (ParseException e) {
-                        // logger.info("Error parsing date: " + dateAndIndex);
+                         logger.info("Error parsing date: " + dateAndIndex);
                         logger.info("Error parsing date: " + dateAndIndex, e);
                     }
                     logger.info(" content Date while loop-2 end before break");
@@ -841,4 +847,17 @@ public class DecoderUtils {
         logger.info("Method Execution time: {} minutes and {} seconds", minutes, seconds);
     }
 
+
+//    public static String getFolderName(String path) {
+//        logger.info("Path---- "+path);
+//        String[] parts = path.split("//");
+//        logger.info("parts---- "+parts[3]);
+//
+//
+//        if (parts.length > 4) {
+//            return parts[4];
+//        }
+//        // Return an empty string if the path format doesn't match
+//        return "";
+//    }
 }
